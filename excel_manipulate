@@ -1,0 +1,20 @@
+from openpyxl import Workbook
+from openpyxl import load_workbook
+
+workbook = load_workbook('C:\\Users\\90024208\\AppData\\Local\\Programs\\Python\\Python311\\hello_world.xlsx')
+sheet = workbook.active
+
+rw=2
+for x in range(1):
+    i = sheet.cell(row=rw, column=1)
+    for z in range(839):
+        j = sheet.cell(row=rw, column=2)
+        print(i.value)
+        print(j.value)
+        rw = rw+1
+        if (i.value == j.value):
+            with open("C:\\Users\\90024208\\AppData\\Local\\Programs\\Python\\Python311\\match.txt", "a") as f:
+                print("match", file=f)
+        else:
+            with open("C:\\Users\\90024208\\AppData\\Local\\Programs\\Python\\Python311\\match.txt", "a") as f:
+                print("not match", file=f)
