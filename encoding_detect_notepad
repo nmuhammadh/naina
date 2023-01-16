@@ -1,0 +1,5 @@
+import chardet
+#open file
+with open('C:\\Users\\90024208\\wlc.txt','rb') as f:
+    result = chardet.detect(f.read())
+    print(result)
