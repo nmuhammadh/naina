@@ -1,0 +1,69 @@
+from netmiko import ConnectHandler
+from netmiko import NetMikoAuthenticationException, NetMikoTimeoutException
+import paramiko
+import getpass,sys,time
+import socket
+from socket import gethostbyname, gaierror
+
+
+
+device = {
+'device_type': 'cisco_ios',
+'ip': '10.176.4.36',
+'username': '90024208',
+'password': 'Sep@2020',
+}
+
+ipfile=open('C:\\Users\\90024208\\AppData\\Local\\Programs\\Python\\Python311\\iplist.txt')
+configset= open('C:\\Users\\90024208\\AppData\\Local\\Programs\\Python\\Python311\\configfile.txt')
+Out = "C:\\Users\\90024208\\AppData\\Local\\Programs\\Python\\Python311\\Out.txt"
+
+for line in ipfile:
+    device['ip']=line.strip("\n")
+    print("\n Connecting Device \n ",line)
+
+    try:
+        net_connect = ConnectHandler(**device)
+    except NetMikoAuthenticationException:
+        print ('Authentication issue: ' + line)
+        continue
+    except socket.timeout:
+        print ('socket Timeout to device: ' + line)
+        pass
+    except socket.gaierror:
+        print ('socket error:' + line)
+        continue
+    except NetMikoTimeoutException:
+        print ('Timeout issue in:' + line)
+        pass
+    except paramiko.AuthenticationException:
+        print ('Authentication issue: ' + line)
+        continue
+    except Exception as e:
+        print('not connected')
+        continue
+    time.sleep(2)
+    print ("\n Passing configuration set \n")
+    
+    try:
+        Output = net_connect.send_config_set(configset)
+        print(Output)
+        with open(Out, 'a') as f:
+            f.write(line)
+            f.write(Output)
+    except OSError:
+        print ("cannot get server details")
+        continue
+    except IndexError:
+        print ("cannot get server details")
+        continue
+    except socket.timeout:
+        print ('socket Timeout to device: ' + line)
+        continue
+    except NetMikoTimeoutException:
+        print ('Timeout issue in:' + line)
+        continue
+    except Exception as e:
+        print('not connected')
+        continue  
+   
