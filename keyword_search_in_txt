@@ -1,0 +1,21 @@
+import re
+import chardet
+import codecs
+#open file
+
+f = open('C:\\Users\\90024208\\wlc-shanghai.txt','r', encoding='utf-8')
+
+#define keywords
+keyword = ["Cisco AP Name....................................","Native Vlan Inheritance: ........................"]
+Out = 'C:\\Users\\90024208\\Output-shanghai-WLC.txt'
+#iterate through each line of the file
+for line in f:
+    for word in keyword:
+        #search for keyword in line using regular expression
+        match = re.search(word, line)
+        if match:
+            print(line)
+            with open(Out, 'a') as f1:
+                f1.write(line)
+#close file
+f.close()
