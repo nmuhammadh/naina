@@ -1,0 +1,28 @@
+from netmiko import ConnectHandler
+
+
+
+def reload(config):
+    net_connect = ConnectHandler(**config)
+    net_connect.enable()
+    print(net_connect.find_prompt())
+    net_connect.send_command("show logging", expect_string="#")
+    net_connect.write_channel("\r\n")
+    #Closing the connection
+    net_connect.disconnect()
+
+ipfile=open('C:\\Users\\90024208\\AppData\\Local\\Programs\\Python\\Python311\\iplist.txt')
+cisco_access_point = {
+ 'device_type': 'cisco_ios',
+ 'ip': '<ip>',
+ 'username': 'hcladmin',
+ 'password': 'Hcl@dm!n',
+ 'secret': 'Hcl@dm!n',
+ 'global_delay_factor': 4
+}
+for line in ipfile:
+    cisco_access_point['ip']=line.strip("\n")
+    print("\n Connecting Device \n ",line)
+    reload(cisco_access_point)
+
+print('Job Done')
