@@ -2,10 +2,10 @@ from netmiko import ConnectHandler
 import getpass,sys,time
 import socket
 ## device settings
-wlc = {'host': '10.85.82.250',
+wlc = {'host': '10.1.1.1',
        'port': 22,
-       'username': '90024208',
-       'password': 'Sep@2020',
+       'username': '90024554333448',
+       'password': 'S33333',
        'device_type': 'cisco_wlc_ssh'}
 wlc_connect = ConnectHandler(**wlc)
 ## CLI Commands list
@@ -18,7 +18,7 @@ wlc_show_commands = ('config paging disable',
 'grep include "FRHQ_N0_AP25" "show client summary"'
 )
 ## Save to txt file
-with open('C:\\Users\\90024208\\AppData\\Local\\Programs\\Python\\Python311\\show.txt', 'w') as f:
+with open('C:\\8\\AppData\\Local\\Programs\\Python\\Python311\\show.txt', 'w') as f:
     for wlc_show_command in wlc_show_commands:
         f.write(wlc_connect.send_command_w_enter(wlc_show_command))
         #time.sleep(2)
