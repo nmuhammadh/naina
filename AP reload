@@ -11,13 +11,13 @@ def reload(config):
     #Closing the connection
     net_connect.disconnect()
 
-ipfile=open('C:\\Users\\90024208\\AppData\\Local\\Programs\\Python\\Python311\\iplist.txt')
+ipfile=open('C:\\Users\\98\\AppData\\Local\\Programs\\Python\\Python311\\iplist.txt')
 cisco_access_point = {
  'device_type': 'cisco_ios',
  'ip': '<ip>',
- 'username': 'hcladmin',
- 'password': 'Hcl@dm!n',
- 'secret': 'Hcl@dm!n',
+ 'username': 'admin',
+ 'password': 'H,,,,',
+ 'secret': 'H,,,',
  'global_delay_factor': 4
 }
 for line in ipfile:
